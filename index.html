@@ -13,17 +13,83 @@
   </head>
 
   <body>
+    <!-- big tittle -->
     <header class="container-fluid">
-        <h1>Weather Dashboard</h1>
+        <nav><h1>Weather Dashboard</h1></nav>
     </header>
-
-    <section class="container">
-        <!-- one row two collums  -->
-        
-        <!-- collum1 has search form and past search -->
-
-        <!-- col2 has 2 rows. row 1 has current search city/// row 2 has 5 days col -->
-
+    <!-- content -->
+    <section> <!-- one row, 2 collums -->
+        <div class="row">
+            <!-- collumn1 city search and past search -->
+            <div class= "card col-md-3 search">
+                <h2 class="text-secondary">Search for a city:</h2>
+                <!-- search box -->
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchinput" type="search" aria-label="Search">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                </div>
+                <!-- past Search is table   -->
+                <table class="table">
+                </table>
+            </div>
+            <!-- col2 current city and 5 days forcast -->
+            <div class= "col-md-9">
+                <!-- row1 for current city info  -->
+                <div class= "row card current">
+                    <div class="card-body "> 
+                        <p class="city"><h3>current city</h3><span id="current-date"></span></p>
+                        <p class="tempF">temp</p>
+                        <p class="humidity">humidity</p>
+                        <p class="wind">wind</p>
+                        <p class="uv">uv</p>
+                    </div>
+                </div>
+                <!-- row 2 for 5 days forecast  -->
+                <h2>5-Day Forecast </h2>
+                <div class= "row 5-days">
+                    <div class= col-md-2>
+                        <div class="card forecast" id="day1">
+                            <p class="date1">date</p>
+                            <p class="icon1">Icon</p>
+                            <p class="temp1">temp</p>
+                            <p class="humidity1">hum</p>
+                        </div>
+                    </div>
+                    <div class= col-md-2>
+                        <div class="card forecast" id="day2">
+                            <p class="date1"></p>
+                            <p class="icon1"></p>
+                            <p class="temp1"></p>
+                            <p class="humidity1"></p>
+                        </div>
+                    </div>
+                    <div class= col-md-2>
+                        <div class="card forecast" id="day3">
+                            <p class="date1"></p>
+                            <p class="icon1"></p>
+                            <p class="temp1"></p>
+                            <p class="humidity1"></p>
+                        </div>
+                    </div>
+                    <div class= col-md-2>
+                        <div class="card forecast">
+                            <p class="date1"></p>
+                            <p class="icon1"></p>
+                            <p class="temp1"></p>
+                            <p class="humidity1"></p>
+                        </div>
+                    </div>
+                    <div class= col-md-2>
+                        <div class="card forecast">
+                            <p class="date1"></p>
+                            <p class="icon1"></p>
+                            <p class="temp1"></p>
+                            <p class="humidity1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

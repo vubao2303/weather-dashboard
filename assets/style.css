@@ -2,4 +2,12 @@ header {
     background-color: navy;
     color: white;
     text-align: center;
+    padding: 1em;
+}
+.search {
+    background-color: rgb(235, 235, 235);
+}
+.forecast {
+    background-color: rgba(48, 62, 252, 0.89);
+    color: white;
 }
