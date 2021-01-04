@@ -15,10 +15,10 @@
   <body>
     <!-- big tittle -->
     <header class="container-fluid">
-        <nav><h1>Weather Dashboard</h1></nav>
+      <nav><h1>Weather Dashboard</h1></nav>
     </header>
     <!-- content -->
-    <section> <!-- one row, 2 collums -->
+    <section class="container-fluid"> <!-- one row, 2 collums -->
         <div class="row">
             <!-- collumn1 city search and past search -->
             <div class= "card col-md-3 search">
@@ -26,22 +26,23 @@
                 <!-- search box -->
                 <div class="input-group">
                     <input type="text" class="form-control" id="searchinput" type="search" aria-label="Search">
-                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-primary search-button" type="button"><i class="fa fa-search"></i></button>
                 </div>
                 <!-- past Search is table   -->
-                <table class="table">
+                <table class="table search-history" >
                 </table>
             </div>
             <!-- col2 current city and 5 days forcast -->
             <div class= "col-md-9">
                 <!-- row1 for current city info  -->
-                <div class= "row card current">
-                    <div class="card-body "> 
-                        <p class="city"><h3>current city</h3><span id="current-date"></span></p>
-                        <p class="tempF">temp</p>
-                        <p class="humidity">humidity</p>
-                        <p class="wind">wind</p>
-                        <p class="uv">uv</p>
+                <div class="row card current">
+                    <div class="col-12 border border-dark m-3 rounded">
+                            <span id="city-name" class="city-name align-middle">City Name</span>
+                            <img id="current-pic" src="placeholder" alt="">
+                            <p id="temperature">temperature</p>
+                            <p id="humidity">humidity</p>
+                            <p id="wind-speed">wind-speed</p>
+                            <p id="UV-index">UV-index</p>  
                     </div>
                 </div>
                 <!-- row 2 for 5 days forecast  -->
@@ -72,7 +73,7 @@
                         </div>
                     </div>
                     <div class= col-md-2>
-                        <div class="card forecast">
+                        <div class="card forecast" id="day4">
                             <p class="date1"></p>
                             <p class="icon1"></p>
                             <p class="temp1"></p>
@@ -80,7 +81,7 @@
                         </div>
                     </div>
                     <div class= col-md-2>
-                        <div class="card forecast">
+                        <div class="card forecast" id="day5">
                             <p class="date1"></p>
                             <p class="icon1"></p>
                             <p class="temp1"></p>
@@ -97,3 +98,5 @@
     <script src="assets/script.js"></script>
   </body>
 </html>
+
+

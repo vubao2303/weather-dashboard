@@ -1,4 +1,5 @@
 # weather-dashboard
+Using data from OpenWeather API to build a weather dashboard that allows user to search for a city to check its current and future weather conditions. The weather board presents the current date, city name, temperature, humidity, wind speed, and UV index, which colors are coded with its condition. There are also 5-day forecast that includes future dates, weather conditions' icons, tempertures, and humidity. Users can also see search history in the history table on the left side of the page. Let's find some sunny city and fly there! 
 
 ## Site Picture
 ![Site]()
@@ -95,6 +96,7 @@ Use addEventListener function to attaches on click event to button element
 - [Link to LinkedIn](https://www.linkedin.com/in/tram-vu-866250121/)
 
 ## License
+© 2012 — 2020 OpenWeather ® All rights reserved.
 
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
 
