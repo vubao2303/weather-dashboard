@@ -33,12 +33,22 @@ $(document).ready(function () {
 		}).then(function (response) {
 			console.log(response);
 			// need date, icon, temp, and humidity 
-			var forecastDate = response.list[0].clouds.dt_text;
+			var forecastDate = response.list[0].dt_txt;
 			console.log(forecastDate);
-			$("#day1").text(forecastDate);
-			// var forcastIcon = 
+			$(".first").text(forecastDate);
+
+			var forecastHum= response.list[0].main.humidity;
+			console.log(forecasthum);
+
+			var forecastIcon =response.list[0].weather[0].icon;
+
+			var forecastTemp= response.list[0].main.temp;
+		
+			
+			
+			// 
 			// var forecasttemp=
-			// var forecasthum= 
+			
 
 
 
@@ -60,11 +70,11 @@ $(document).ready(function () {
 			// city name
 			$("#city-name").html("<h2>" + response.name + " (" + date + ") " + "</h2>");
 			// temperature
-			temperature.text("Temperture: " + response.main.temp + " F");
+			temperature.text(" " + response.main.temp + " F");
 			// humidity 
-			humidity.text("Humidity : " + response.main.humidity + "%");
+			humidity.text(" " + response.main.humidity + "%");
 			// windSpeed
-			windSpeed.text("Wind Speed: " + response.wind.speed + "MPH");
+			windSpeed.text("" + response.wind.speed + "MPH");
 
 			// work on UV Index	
 			var uviAPI = "https://api.openweathermap.org/data/2.5/uvi?lat=";
@@ -80,7 +90,7 @@ $(document).ready(function () {
 				console.log(uviQueryURL);
 				console.log(response);
 				var result = response.value;
-				UV.text("UV Index: " + result);
+				UV.text(result);
 
 				if (result < 3) {
 					UV.css('background-color', 'green');
@@ -110,7 +120,7 @@ $(document).ready(function () {
 		localStorage.setItem("city", JSON.stringify(searchHistory));
 		// below marks the end of button clicked 
 	});
-// keep the local storage to the page 
+// keep the local storage on the page
 	$(".search-history").text(JSON.parse(localStorage.getItem('city')));
 
 });
