@@ -82,9 +82,9 @@ function initPage() {
   }
 
   searchEl.addEventListener("click",function() {
-      const searchTerm = inputEl.value;
-      getWeather(searchTerm);
-      searchHistory.push(searchTerm);
+    //   const searchTerm = inputEl.value;
+    //   getWeather(searchTerm);
+    //   searchHistory.push(searchTerm);
       localStorage.setItem("search",JSON.stringify(searchHistory));
       renderSearchHistory();
   })
@@ -97,19 +97,38 @@ function initPage() {
   function k2f(K) {
       return Math.floor((K - 273.15) *1.8 +32);
   }
+  var searchHistory = JSON.parse(localStorage.getItem("city")) || []
+//   when button is clicked 
+searchHistory.push(citySearch);
+localStorage.setItem("city",JSON.stringify(searchHistory));
+renderSearchHistory();
+
+
+  function renderSearchHistory(){
+    // var historylist = [];
+    for (var i = 0; i < searchHistory.length; i++) {
+    var newSearch = $('<tr>');
+    newSearch.attr("value",searchHistory[i]);
+    // newSearch.on("click",function (){}) this is for when this is clicked info for that city will show
+    }
+    searchHistory.append(newSearch);
+  }
+
+
+
 
   function renderSearchHistory() {
-      historyEl.innerHTML = "";
-      for (let i=0; i<searchHistory.length; i++) {
-          const historyItem = document.createElement("input");
+    //   historyEl.innerHTML = "";
+    //   for (let i=0; i<searchHistory.length; i++) {
+        //   const historyItem = document.createElement("input");
           // <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"></input>
-          historyItem.setAttribute("type","text");
-          historyItem.setAttribute("readonly",true);
-          historyItem.setAttribute("class", "form-control d-block bg-white");
-          historyItem.setAttribute("value", searchHistory[i]);
-          historyItem.addEventListener("click",function() {
-              getWeather(historyItem.value);
-          })
+        //   historyItem.setAttribute("type","text");
+        //   historyItem.setAttribute("readonly",true);
+        //   historyItem.setAttribute("class", "form-control d-block bg-white");
+        //   historyItem.setAttribute("value", searchHistory[i]);
+        //   historyItem.addEventListener("click",function() {
+        //       getWeather(historyItem.value);
+        //   })
           historyEl.append(historyItem);
       }
   }
@@ -316,3 +335,151 @@ $("#humility").text("humiduty:" + humidiyt )
 
 
 $("#temperture").span.text(temperture)
+
+
+function displayHistory() {
+    var getLocalSearchHistory = localStorage.getItem('searchHistory');
+    var localSearchHistory = JSON.parse(getLocalSearchHistory);
+
+    if (getLocalSearchHistory === null) {
+      createHistory();
+      getLocalSearchHistory = localStorage.getItem('searchHistory');
+      localSearchHistory = JSON.parse(getLocalSearchHistory);
+    }
+
+    for (var i = 0; i < localSearchHistory.length; i++) {
+      var historyLi = $('<li>');
+      historyLi.addClass('list-group-item');
+      historyLi.text(localSearchHistory[i].city);
+      $('#search-history').prepend(historyLi);
+      $('#search-history-container').show();
+    }
+    return (searchHistoryArr = localSearchHistory);
+  }
+
+  function createHistory() {
+    searchHistoryArr.length = 0;
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArr));
+  }
+
+
+//   working with history 
+
+  var historylist =[];
+  localStorage.setItem('searchHistory', JSON.stringify(historylist));
+  var pastSearch = localStorage.getItem('searchHistory');
+  var localSearchHistory = JSON.parse(pastSearch);
+
+  if (pastSearch=== null) {
+    localStorage.setItem('searchHistory', JSON.stringify(historylist));
+    pastSearch = localStorage.getItem('searchHistory');
+    localSearchHistory = JSON.parse(pastSearch);
+  }
+  for (var i = 0; i < localSearchHistory.length; i++) {
+    var newSearch = $('<tr>');
+    newSearch.text(historylist[i].citySearch)
+    console.log(newSearch);
+	searchHistory.append(newSearch);
+  }
+  return (historylist = localSearchHistory);
+
+
+
+
+	var pastSearch= localStorage.setItem("city", citySearch)
+	for (var i=0; i < pastSearch.length; i++){
+		var newSearch = $("<tr>");
+		newSearch.text(historylist[i].pastSearch);
+		console.log(newSearch);
+		searchHistory.append(newSearch);
+	}
+
+// 	}
+
+// working with history table 
+// every user input will go in a table row 
+
+
+// first try
+// var historylist = localStorage.getItem('city');
+// if (historylist === null) {
+// 	historylist = [];
+// }
+// else {
+// 	historylist = JSON.parse(historylist);
+// }
+// // var citySearch is user input, it was call in the golbal, but we will use it again here
+
+// historylist.push(citySearch);
+// localStorage.setItem('city', JSON.stringify(historylist));
+// for (var i = 0; i < historylist.length; i++) {
+
+// 	var newSearch = $('<tr>');
+// 	newSearch.text(historylist[i].citySearch);
+// 	searchHistory.append(newSearch);
+
+// }
+
+
+// second try
+// var historylist =[];
+// localStorage.setItem('city', JSON.stringify(historylist));
+// var pastSearch = localStorage.getItem('city');
+// var localSearchHistory = JSON.parse(pastSearch);
+
+// if (pastSearch=== null) {
+// 	localStorage.setItem('city', JSON.stringify(historylist));
+// 	pastSearch = localStorage.getItem('city');
+// 	localSearchHistory = JSON.parse(pastSearch);
+// }
+// for (var i = 0; i < localSearchHistory.length; i++) {
+// 	var newSearch = $('<tr>');
+// 	newSearch.text(historylist[i].citySearch)
+// 	console.log(newSearch);
+// searchHistory.append(newSearch);
+// }
+// return (historylist = localSearchHistory);
+
+
+// third try
+
+// function history (){
+// var historylist = [];
+// var pastSearch = localStorage.setItem("city", citySearch)
+// for (var i = 0; i < pastSearch.length; i++) {
+// 	var newSearch = $("<tr>");
+// 	newSearch.text(historylist[i].pastSearch);
+// 	console.log(newSearch);
+// 	searchHistory.append(newSearch);
+// }
+
+// 	}
+
+
+
+
+// function displayHistory() {
+// 	var getLocalSearchHistory = localStorage.getItem('searchHistory');
+// 	var localSearchHistory = JSON.parse(getLocalSearchHistory);
+
+// 	if (getLocalSearchHistory === null) {
+// 		createHistory();
+// 		getLocalSearchHistory = localStorage.getItem('searchHistory');
+// 		localSearchHistory = JSON.parse(getLocalSearchHistory);
+// 	}
+
+// 	for (var i = 0; i < localSearchHistory.length; i++) {
+// 		var historyLi = $('<li>');
+// 		historyLi.addClass('list-group-item');
+// 		historyLi.text(localSearchHistory[i].city);
+// 		searchHistory.prepend(historyLi);
+
+// 	}
+// 	return (searchHistoryArr = localSearchHistory);
+// }
+
+
+
+// });
+
+// WORKING CODE
