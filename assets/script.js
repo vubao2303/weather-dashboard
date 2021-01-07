@@ -32,7 +32,7 @@ $(document).ready(function () {
 			method: 'GET'
 		}).then(function (response) {
 			console.log(response);
-
+			$(".target").empty();
 			for (let i = 0; i < response.list.length; i++) {
 				// only look at forecasts around 3:00pm
 				// console.log("looping");
@@ -40,7 +40,6 @@ $(document).ready(function () {
 					console.log(response.list[i])
 					var forecastIcon = response.list[i].weather[0].icon
 					var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
-
 					var card = `
 					<div class=col-md-2>
 						<div class="card forecast" id="day1">
@@ -51,16 +50,17 @@ $(document).ready(function () {
 						</div>
 					</div>
 					`
+					
 					// console.log($(".target"));
 					$(".target").append(card);
-					
 						
 				}
+
+				
 				// else {$(".target").empty()};
 			}
 
 		});
-
 
 		// current Weather 
 		$.ajax({
@@ -123,7 +123,9 @@ $(document).ready(function () {
 		newSearch.text(citySearch);
 		console.log(newSearch);
 		$(".search-history").append(newSearch);
-		searchHistory.push(citySearch);
+		if (!searchHistory.includes(citySearch)){
+		searchHistory.push(citySearch);}
+
 		// save userinput to local storage
 		localStorage.setItem("city", JSON.stringify(searchHistory));
 		// below marks the end of button clicked 
@@ -133,13 +135,16 @@ $(document).ready(function () {
 
 	var historyarr = JSON.parse(localStorage.getItem('city'))
 	for (var i = 0; i < historyarr.length; i++) {
+		if(historyarr[i]!== ""){
+
 		var newlist = $("<li>");
 		newlist.addClass("city-list");
 		newlist.text(historyarr[i]);
 		console.log(JSON.parse(localStorage.getItem('city')));
 		// go through if you find a comma, then split it into different words 
 		// splice? split?
-		$(".search-history").append(newlist);
+		
+			$(".search-history").append(newlist);}
 		$(".clear-button").on("click", function (){
 			historyarr.empty();
 		})

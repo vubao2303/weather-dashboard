@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../Project-1"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../homework/responsive-portfolio"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Project-1",
+		"liveServer.settings.port": 5501
+	}
+}
