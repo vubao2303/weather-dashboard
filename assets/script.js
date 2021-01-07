@@ -13,13 +13,10 @@ var APIKey = "9fbba8bfea87cd371d313708e1beec24";
 var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 
-
-
 $(document).ready(function () {
 
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and name to history
 	$(".search-button").on("click", function (event) {
-		
 		event.preventDefault();
 		// user input value 
 		var citySearch = $('#searchinput').val().trim();
@@ -36,7 +33,6 @@ $(document).ready(function () {
 		}).then(function (response) {
 			console.log(response);
 
-			console.log("looping");
 			for (let i = 0; i < response.list.length; i++) {
 				// only look at forecasts around 3:00pm
 				// console.log("looping");
@@ -44,7 +40,6 @@ $(document).ready(function () {
 					console.log(response.list[i])
 					var forecastIcon = response.list[i].weather[0].icon
 					var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
-					// 	$(".icon1").attr("src", ficonimg);
 
 					var card = `
 					<div class=col-md-2>
@@ -58,12 +53,14 @@ $(document).ready(function () {
 					`
 					// console.log($(".target"));
 					$(".target").append(card);
+					
 						
 				}
 				// else {$(".target").empty()};
 			}
 
 		});
+
 
 		// current Weather 
 		$.ajax({
@@ -144,7 +141,7 @@ $(document).ready(function () {
 		// splice? split?
 		$(".search-history").append(newlist);
 		$(".clear-button").on("click", function (){
-			localStorage.setItem("city", "")
+			historyarr.empty();
 		})
 	}
 

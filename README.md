@@ -29,41 +29,89 @@ Using data from OpenWeather API to build a weather dashboard that allows user to
   
 * In HTML file 
   <ul>
-  
+  <li> Build HTML in semantic structure
+  <li> Link files and API websites 
+  <li> Create a Nav Bar to display the title 
+  <li> Organize contents of search history, current weather, and five days forecast
+  </li>
   </ul>
     
 * In Javascript file 
   <ul>
-  
+  <li> Name variables as pointers to html page and to use in functions
+  <li> Add on click functions to generate events 
+  <li> Use ajax funtion to get API querylinks from OpenWeather website 
+  <li> Console log out response to traverse through the objects and find information about the weather
+
   </ul>
 * In Style.Css file 
+* <li>Style cards 
+  <li>Add style to search button with search icon and color  
+  <li>Color headers and titles
+  <li>Adjust texts, margin, and padding 
+  </li>
+
+
 * <ul>
   
   </ul>
 ## Code Snippet
-Apply real live hour to the page 
-```javascript
-
-
-```
 
 Have all the events and functions in ready function to execute the code when the DOM is ready 
 ```javascript
-
-
+$(document).ready(function () {
 ```
 Name contents using variables 
 ```javascript
+var UV = $("#UV-index");
+var date = moment().format("DD/MM/YYYY");
+var APIKey = "9fbba8bfea87cd371d313708e1beec24";
+var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 ```
 Use addEventListener function to attaches on click event to button element
 ```javascript 
-
-  ```
-  Use conditional statement to compare the time and add class accordingly 
-  ```javascript 
+$(".search-button").on("click", function (event) {}
   
+$(".clear-button").on("click", function (){
+	$(".search-history").empty();
+})
+```
+Use conditional statement to compare the time and add class accordingly 
+```javascript 
+if (result < 3) {
+    UV.css('background-color', 'green');
+  } else if (result < 6) {
+    UV.css('background-color', 'yellow');
+  } else if (result < 8) {
+    UV.css('background-color', 'orange');
+  } else if (result < 11) {
+    UV.css('background-color', 'red');
+  } else {
+    UV.css('background-color', 'purple');
+  }
+  });
+  
+```
+
+Utilize backtick to create HTML tags inside js file
+  ```javascript 
+    var card = `
+    <div class=col-md-2>
+      <div class="card forecast" id="day1">
+      <p class="date">${response.list[i].dt_txt}</p>
+      <div><img src=${ficonimg} alt="icon" ></img></div>
+      <p class="temp">Temp: ${response.list[i].main.temp}</p>
+      <p class="humidity"> Humidity:${response.list[i].main.humidity}%</p>
+      </div>
+    </div>
+    `
   ```
+Save user input in local storage 
+```javascript 
+  localStorage.setItem("city", JSON.stringify(searchHistory));
+  var historyarr = JSON.parse(localStorage.getItem('city'));
+```
 
 ## Technologies Used
 - HTML - used to create elements on the DOM
@@ -84,7 +132,7 @@ Use addEventListener function to attaches on click event to button element
 
 ## Deployed Link
 
-* [See Live Site]()
+* [See Live Site](https://vubao2303.github.io/weather-dashboard/)
 
 
 ## Author
@@ -92,7 +140,7 @@ Use addEventListener function to attaches on click event to button element
 * **B Tram Vu** 
 
 - [Link to Portfolio Site](https://github.com/vubao2303)
-- [Link to Github]()
+- [Link to Github](https://github.com/vubao2303)
 - [Link to LinkedIn](https://www.linkedin.com/in/tram-vu-866250121/)
 
 ## License
