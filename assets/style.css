@@ -11,12 +11,6 @@ header {
     background-color: rgba(48, 62, 252, 0.89);
     color: white;
 }
-/* #current-pic {
-    float:right;
-} */
- /* #city-name {
-    float: left;
-} */
-/* .wind{
-    float: left;
-} */ */
+h2,h5 {
+    color: rgb(100, 3, 3);
+}

@@ -27,7 +27,7 @@
 		<div class="row">
 			<!-- collumn1 city search and past search -->
 			<div class="card col-md-3 search">
-				<h2 class="text-secondary">Search for a city:</h2>
+				<h5 class="text">Search for a city:</h5>
 				<!-- search box -->
 				<div class="input-group">
 					<input type="text" class="form-control" id="searchinput" type="search" aria-label="Search">
@@ -41,7 +41,7 @@
 			<!-- col2 current city and 5 days forcast -->
 			<div class="col-md-9">
 				<!-- row1 for current city info  -->
-				<div class="row card current">
+				<div class="row current">
 					<div class="col-12 border border-dark m-3 rounded">
 						<div><span id="city-name" class="city-name align-middle">
 							<h2>City Name</h2>
@@ -55,11 +55,26 @@
 					</div>
 				</div>
 				<!-- row 2 for 5 days forecast  -->
-				<h2>5-Day Forecast </h2>
+				
+				<div class="row">
+					<div class="col-12">
+							<h3>5-Day Forecast</h3>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
+					<div class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
+					<div class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
+					<div class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
+					<div class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
+			</div>
+
+
+<!-- 
 				<div class="row 5-days">
 					<div class=col-md-2>
 						<div class="card forecast" id="day1">
-							<p class="first">date1</p>
+							<p class="date1">date1</p>
 							<p class="icon1">Icon</p>
 							<p class="temp1">temp</p>
 							<p class="humidity1">hum</p>
@@ -97,7 +112,7 @@
 							<p class="humidity1"></p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>

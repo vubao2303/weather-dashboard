@@ -37,18 +37,40 @@ $(document).ready(function () {
 			console.log(forecastDate);
 			$(".first").text(forecastDate);
 
-			var forecastHum= response.list[0].main.humidity;
+			var forecastHum = response.list[0].main.humidity;
 			console.log(forecasthum);
 
-			var forecastIcon =response.list[0].weather[0].icon;
+			var forecastIcon = response.list[0].weather[0].icon;
 
-			var forecastTemp= response.list[0].main.temp;
-		
-			
-			
-			// 
-			// var forecasttemp=
-			
+			var forecastTemp = response.list[0].main.temp;
+
+
+			var forecast = $(".forecast");
+			for (i = 0; forecast.length; i++) {
+				forecast[i] = "";
+
+				$(".date1").text(forecastDate);
+
+				var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+				$(".icon1").attr("src", ficonimg);
+
+				$(".temp1").text(forecastTemp);
+
+				$(".humidity1").text(forecastHum);
+
+				var imgEl = $("<img>");
+				forecastWeatherEl.attr("src", ficonimg);
+				forecastEls[i].append(imgEl);
+
+
+				var tempEl = $("<p>");
+				forecastTempEl.text("Temp: " + forecastTemp);
+				forecastEls[i].append(tempEl);
+
+				var humidityEl = $("<p>");
+				forecastHumidityEl.text("Humidity: " + forecastHum + "%");
+				forecastEls[i].append(fhumidityEl);
+			}
 
 
 
@@ -70,7 +92,7 @@ $(document).ready(function () {
 			// city name
 			$("#city-name").html("<h2>" + response.name + " (" + date + ") " + "</h2>");
 			// temperature
-			temperature.text(" " + response.main.temp + " F");
+			temperature.text(" " + response.main.temp + " °F");
 			// humidity 
 			humidity.text(" " + response.main.humidity + "%");
 			// windSpeed
@@ -120,8 +142,19 @@ $(document).ready(function () {
 		localStorage.setItem("city", JSON.stringify(searchHistory));
 		// below marks the end of button clicked 
 	});
-// keep the local storage on the page
-	$(".search-history").text(JSON.parse(localStorage.getItem('city')));
+	// keep the local storage on the page
+	// for (var i=0; i<searchHistory.length; i++){
+
+	var historyarr = JSON.parse(localStorage.getItem('city'))
+	for (var i = 0; i < historyarr.length; i++) {
+		var newlist = $("<tr>");
+		newlist.text(historyarr[i]);
+		console.log(JSON.parse(localStorage.getItem('city')));
+		// go through if you find a comma, then split it into different words 
+		// splice? split?
+		$(".search-history").append(newlist);
+	}
 
 });
+
 
