@@ -32,45 +32,71 @@ $(document).ready(function () {
 			method: 'GET'
 		}).then(function (response) {
 			console.log(response);
+
 			// need date, icon, temp, and humidity 
-			var forecastDate = response.list[0].dt_txt;
-			console.log(forecastDate);
-			$(".first").text(forecastDate);
+			// var forecastDate = response.list[0].dt_txt;
+			// console.log(forecastDate);
+			// $(".first").text(forecastDate);
 
-			var forecastHum = response.list[0].main.humidity;
-			console.log(forecasthum);
+			// var forecastHum = response.list[0].main.humidity;
+			// console.log(forecasthum);
 
-			var forecastIcon = response.list[0].weather[0].icon;
+			// var forecastIcon = response.list[0].weather[0].icon;
 
-			var forecastTemp = response.list[0].main.temp;
+			// var forecastTemp = response.list[0].main.temp;
+			console.log("looping");
+			for (let i = 0; i < response.list.length; i++) {
+				// only look at forecasts around 3:00pm
+				// console.log("looping");
+				if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+					console.log(response.list[i])
+					var forecastIcon = response.list[i].weather[0].icon
+					var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+					// 	$(".icon1").attr("src", ficonimg);
+
+					var card = `
+					<div class=col-md-2>
+					<div class="card forecast" id="day1">
+						<p class="date1">${response.list[i].dt_txt}</p>
+						<img src=ficonimg alt="icon" ></img>
+						<p class="temp1">${response.list[i].main.temp}</p>
+						<p class="humidity1">${response.list[i].main.humidity}</p>
+					</div>
+				</div>
+					`
+					// console.log($(".target"));
+					$(".target").append(card);
+
+					// var forecast = $(".forecast");
+					// for (i = 0; forecast.length; i++) {
+					// 	forecast[i] = "";
+
+					// 	$(".date1").text(forecastDate);
+
+					// 	var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+					// 	$(".icon1").attr("src", ficonimg);
+
+					// 	$(".temp1").text(forecastTemp);
+
+					// 	$(".humidity1").text(forecastHum);
+
+					// 	var imgEl = $("<img>");
+					// 	forecastWeatherEl.attr("src", ficonimg);
+					// 	forecastEls[i].append(imgEl);
 
 
-			var forecast = $(".forecast");
-			for (i = 0; forecast.length; i++) {
-				forecast[i] = "";
+					// 	var tempEl = $("<p>");
+					// 	forecastTempEl.text("Temp: " + forecastTemp);
+					// 	forecastEls[i].append(tempEl);
 
-				$(".date1").text(forecastDate);
+					// 	var humidityEl = $("<p>");
+					// 	forecastHumidityEl.text("Humidity: " + forecastHum + "%");
+					// 	forecastEls[i].append(fhumidityEl);
+					// }
 
-				var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
-				$(".icon1").attr("src", ficonimg);
-
-				$(".temp1").text(forecastTemp);
-
-				$(".humidity1").text(forecastHum);
-
-				var imgEl = $("<img>");
-				forecastWeatherEl.attr("src", ficonimg);
-				forecastEls[i].append(imgEl);
-
-
-				var tempEl = $("<p>");
-				forecastTempEl.text("Temp: " + forecastTemp);
-				forecastEls[i].append(tempEl);
-
-				var humidityEl = $("<p>");
-				forecastHumidityEl.text("Humidity: " + forecastHum + "%");
-				forecastEls[i].append(fhumidityEl);
+				}
 			}
+
 
 
 

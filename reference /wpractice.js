@@ -47,6 +47,10 @@ function initPage() {
           currentUVEl.innerHTML = "UV Index: ";
           currentUVEl.append(UVIndex);
       });
+
+
+
+      // herer is the forecast/
 //  Using saved city name, execute a 5-day forecast get request from open weather map api
       let cityID = response.data.id;
       let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
@@ -145,10 +149,53 @@ renderSearchHistory();
 }
 initPage();
 
+// working code 
+
+var forecast = $(".forecast");
+for (i = 0; forecast.length; i++) {
+  forecast[i] = "";
+
+  $(".date1").text(forecastDate);
+
+  var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+  $(".icon1").attr("src", ficonimg);
+
+  $(".temp1").text(forecastTemp);
+
+  $(".humidity1").text(forecastHum);
+
+  var imgEl = $("<img>");
+  forecastWeatherEl.attr("src", ficonimg);
+  forecastEls[i].append(imgEl);
+
+
+  var tempEl = $("<p>");
+  forecastTempEl.text("Temp: " + forecastTemp);
+  forecastEls[i].append(tempEl);
+
+  var humidityEl = $("<p>");
+  forecastHumidityEl.text("Humidity: " + forecastHum + "%");
+  forecastEls[i].append(fhumidityEl);
+}
 
 
 
+working ConvolverNode
 
+
+
+var forecast =$(".forecast");
+for (i=0; forecast.length; i++){
+  forecast[i]="";
+  $("#date1").text(forecastDate);
+
+  var ficonimg= "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+  $("#icon").attr("src".ficonimg );
+
+  $("#temp1").text(forecastTemp);
+
+  $("#humidity1").text()
+  
 
 
 // CODE PRACTICE HERE 
