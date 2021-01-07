@@ -13,10 +13,13 @@ var APIKey = "9fbba8bfea87cd371d313708e1beec24";
 var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 
+
+
 $(document).ready(function () {
 
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and name to history
 	$(".search-button").on("click", function (event) {
+		
 		event.preventDefault();
 		// user input value 
 		var citySearch = $('#searchinput').val().trim();
@@ -33,17 +36,6 @@ $(document).ready(function () {
 		}).then(function (response) {
 			console.log(response);
 
-			// need date, icon, temp, and humidity 
-			// var forecastDate = response.list[0].dt_txt;
-			// console.log(forecastDate);
-			// $(".first").text(forecastDate);
-
-			// var forecastHum = response.list[0].main.humidity;
-			// console.log(forecasthum);
-
-			// var forecastIcon = response.list[0].weather[0].icon;
-
-			// var forecastTemp = response.list[0].main.temp;
 			console.log("looping");
 			for (let i = 0; i < response.list.length; i++) {
 				// only look at forecasts around 3:00pm
@@ -56,49 +48,20 @@ $(document).ready(function () {
 
 					var card = `
 					<div class=col-md-2>
-					<div class="card forecast" id="day1">
-						<p class="date1">${response.list[i].dt_txt}</p>
-						<img src=ficonimg alt="icon" ></img>
-						<p class="temp1">${response.list[i].main.temp}</p>
-						<p class="humidity1">${response.list[i].main.humidity}</p>
+						<div class="card forecast" id="day1">
+						<p class="date">${response.list[i].dt_txt}</p>
+						<div><img src=${ficonimg} alt="icon" ></img></div>
+						<p class="temp">Temp: ${response.list[i].main.temp}</p>
+						<p class="humidity"> Humidity:${response.list[i].main.humidity}%</p>
+						</div>
 					</div>
-				</div>
 					`
 					// console.log($(".target"));
 					$(".target").append(card);
-
-					// var forecast = $(".forecast");
-					// for (i = 0; forecast.length; i++) {
-					// 	forecast[i] = "";
-
-					// 	$(".date1").text(forecastDate);
-
-					// 	var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
-					// 	$(".icon1").attr("src", ficonimg);
-
-					// 	$(".temp1").text(forecastTemp);
-
-					// 	$(".humidity1").text(forecastHum);
-
-					// 	var imgEl = $("<img>");
-					// 	forecastWeatherEl.attr("src", ficonimg);
-					// 	forecastEls[i].append(imgEl);
-
-
-					// 	var tempEl = $("<p>");
-					// 	forecastTempEl.text("Temp: " + forecastTemp);
-					// 	forecastEls[i].append(tempEl);
-
-					// 	var humidityEl = $("<p>");
-					// 	forecastHumidityEl.text("Humidity: " + forecastHum + "%");
-					// 	forecastEls[i].append(fhumidityEl);
-					// }
-
+						
 				}
+				// else {$(".target").empty()};
 			}
-
-
-
 
 		});
 
@@ -156,10 +119,10 @@ $(document).ready(function () {
 			// done with ajax response for current weather
 		});
 
-		// when the button click
-		// create a new element 
+		// when the button click create a new element 
 		var newSearch = $("<tr>");
 		//  that new element is user input
+		
 		newSearch.text(citySearch);
 		console.log(newSearch);
 		$(".search-history").append(newSearch);
@@ -173,14 +136,24 @@ $(document).ready(function () {
 
 	var historyarr = JSON.parse(localStorage.getItem('city'))
 	for (var i = 0; i < historyarr.length; i++) {
-		var newlist = $("<tr>");
+		var newlist = $("<li>");
+		newlist.addClass("city-list");
 		newlist.text(historyarr[i]);
 		console.log(JSON.parse(localStorage.getItem('city')));
 		// go through if you find a comma, then split it into different words 
 		// splice? split?
 		$(".search-history").append(newlist);
+		$(".clear-button").on("click", function (){
+			localStorage.setItem("city", "")
+		})
 	}
 
 });
 
 
+function displaySearch (){
+	
+}
+$(".clear-button").on("click", function (){
+	$(".search-history").empty();
+})
