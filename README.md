@@ -2,7 +2,7 @@
 Using data from OpenWeather API to build a weather dashboard that allows user to search for a city to check its current and future weather conditions. The weather board presents the current date, city name, temperature, humidity, wind speed, and UV index, which colors are coded with its condition. There are also 5-day forecast that includes future dates, weather conditions' icons, tempertures, and humidity. Users can also see search history in the history table on the left side of the page. Let's find some sunny city and fly there! 
 
 ## Site Picture
-![Site]()
+![Site](./assets/weatherdashboard.png)
 
 # Table of Contents 
 [Tittle](#weather-dashboard)
@@ -42,18 +42,15 @@ Using data from OpenWeather API to build a weather dashboard that allows user to
   <li> Add on click functions to generate events 
   <li> Use ajax funtion to get API querylinks from OpenWeather website 
   <li> Console log out response to traverse through the objects and find information about the weather
-
+  </li>
   </ul>
 * In Style.Css file 
-* <li>Style cards 
+  <ul>
+  <li>Style cards 
   <li>Add style to search button with search icon and color  
   <li>Color headers and titles
   <li>Adjust texts, margin, and padding 
   </li>
-
-
-* <ul>
-  
   </ul>
 ## Code Snippet
 

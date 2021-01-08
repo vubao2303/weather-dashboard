@@ -11,6 +11,23 @@ header {
     background-color: rgba(48, 62, 252, 0.89);
     color: white;
 }
-h2,h5 {
+h2,h4 {
     color: rgb(100, 3, 3);
+}
+table {
+    margin-top: 1em; 
+    background-color: white;
+
+}
+.table-borders {
+    margin: 3em;
+    text-align: center;
+    font-size: 10em;
+    border: solid black;
+}
+tr {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    margin-left: 1em;
 }

@@ -14,6 +14,7 @@ var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 
 $(document).ready(function () {
+	
 
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and name to history
 	$(".search-button").on("click", function (event) {
@@ -118,11 +119,12 @@ $(document).ready(function () {
 
 		// when the button click create a new element 
 		var newSearch = $("<tr>");
+		newSearch.addClass("table-bordered");
 		//  that new element is user input
 		
 		newSearch.text(citySearch);
 		console.log(newSearch);
-		$(".search-history").append(newSearch);
+		$(".search-history").prepend(newSearch);
 		if (!searchHistory.includes(citySearch)){
 		searchHistory.push(citySearch);}
 
@@ -136,15 +138,15 @@ $(document).ready(function () {
 	var historyarr = JSON.parse(localStorage.getItem('city'))
 	for (var i = 0; i < historyarr.length; i++) {
 		if(historyarr[i]!== ""){
-
-		var newlist = $("<li>");
-		newlist.addClass("city-list");
+			// this is where it stay on the page after click refresh
+		var newlist = $("<tr>");
+		newlist.addClass("city-list table-bordered");
 		newlist.text(historyarr[i]);
 		console.log(JSON.parse(localStorage.getItem('city')));
 		// go through if you find a comma, then split it into different words 
 		// splice? split?
 		
-			$(".search-history").append(newlist);}
+			$(".search-history").prepend(newlist);}
 		$(".clear-button").on("click", function (){
 			historyarr.empty();
 		})
