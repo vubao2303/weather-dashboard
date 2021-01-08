@@ -14,8 +14,6 @@ var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
 
 
 $(document).ready(function () {
-	
-
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and name to history
 	$(".search-button").on("click", function (event) {
 		event.preventDefault();
@@ -25,7 +23,6 @@ $(document).ready(function () {
 		searchInput.val("");
 		var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
 		var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
-
 
 		// Five days forcast 
 		$.ajax({
@@ -51,16 +48,10 @@ $(document).ready(function () {
 						</div>
 					</div>
 					`
-					
-					// console.log($(".target"));
+					// display forecast in 
 					$(".target").append(card);
-						
 				}
-
-				
-				// else {$(".target").empty()};
 			}
-
 		});
 
 		// current Weather 
@@ -119,14 +110,15 @@ $(document).ready(function () {
 
 		// when the button click create a new element 
 		var newSearch = $("<tr>");
-		newSearch.addClass("table-bordered");
+		newSearch.addClass("city-list table-bordered");
 		//  that new element is user input
-		
+
 		newSearch.text(citySearch);
 		console.log(newSearch);
 		$(".search-history").prepend(newSearch);
-		if (!searchHistory.includes(citySearch)){
-		searchHistory.push(citySearch);}
+		if (!searchHistory.includes(citySearch)) {
+			searchHistory.push(citySearch);
+		}
 
 		// save userinput to local storage
 		localStorage.setItem("city", JSON.stringify(searchHistory));
@@ -137,27 +129,148 @@ $(document).ready(function () {
 
 	var historyarr = JSON.parse(localStorage.getItem('city'))
 	for (var i = 0; i < historyarr.length; i++) {
-		if(historyarr[i]!== ""){
+		if (historyarr[i] !== "") {
 			// this is where it stay on the page after click refresh
-		var newlist = $("<tr>");
-		newlist.addClass("city-list table-bordered");
-		newlist.text(historyarr[i]);
-		console.log(JSON.parse(localStorage.getItem('city')));
-		// go through if you find a comma, then split it into different words 
-		// splice? split?
-		
-			$(".search-history").prepend(newlist);}
-		$(".clear-button").on("click", function (){
+			var newlist = $("<button>");
+			newlist.addClass("city-list table-bordered");
+			newlist.text(historyarr[i]);
+			console.log(JSON.parse(localStorage.getItem('city')));
+			// go through if you find a comma, then split it into different words 
+			// splice? split?
+
+			$(".search-history").prepend(newlist);
+		}
+		$(".clear-button").on("click", function () {
 			historyarr.empty();
 		})
 	}
 
+//document.ready function ends' marks here  
 });
 
+// ABOVE WORKS BEAUTIFULLY NOW LET'S BREAK IT 
 
-function displaySearch (){
-	
+
+
+
+var citySearch = $('#searchinput').val();
+// set the box back to empty 
+searchInput.val("");
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+
+
+// display fivedays forecast (should be working code )
+function displayFivedays() {
+	var citySearch = $('#searchinput').val();
+	console.log(citySearch);
+	// set the box back to empty 
+	var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+	$.ajax({
+		url: fiveQueryURL,
+		method: 'GET'
+	}).then(function (response) {
+		console.log(response);
+		$(".target").empty();
+		for (let i = 0; i < response.list.length; i++) {
+			// only look at forecasts around 3:00pm
+			// console.log("looping");
+			if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+				console.log(response.list[i])
+				var forecastIcon = response.list[i].weather[0].icon
+				var ficonimg = "http://openweathermap.org/img/wn/" + forecastIcon + ".png";
+				// 	$(".icon1").attr("src", ficonimg);
+				// this is the cool way now to just add html style to js, by ` `
+				var card = `
+				<div class=col-md-2>
+				<div class="card forecast" id="day1">
+					<p class="date">${response.list[i].dt_txt}</p>
+					<img src=${ficonimg} alt="icon" ></img>
+					<p class="temp">Temp: ${response.list[i].main.temp}</p>
+					<p class="humidity"> Humidity:${response.list[i].main.humidity}%</p>
+				</div>
+				</div>
+				`
+				$(".target").append(card);
+			}
+		}
+	});
 }
-$(".clear-button").on("click", function (){
-	$(".search-history").empty();
-})
+
+// display current weather Should also be working  
+
+function displaycurrent() {
+	var citySearch = $('#searchinput').val();
+// set the box back to empty 
+
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+
+	$.ajax({
+		url: queryURL,
+		method: "GET"
+	}).then(function (response) {
+		console.log(response);
+		// icon
+		var icon = response.weather[0].icon;
+		var iconimg = "http://openweathermap.org/img/wn/" + icon + ".png";
+		// var icondisplay = 
+		$("#current-pic").attr("src", iconimg);
+		// city name
+		$("#city-name").html("<h2>" + response.name + " (" + date + ") " + "</h2>");
+		// temperature
+		temperature.text(" " + response.main.temp + " °F");
+		// humidity 
+		humidity.text(" " + response.main.humidity + "%");
+		// windSpeed
+		windSpeed.text("" + response.wind.speed + "MPH");
+
+		// work on UV Index	
+		var uviAPI = "https://api.openweathermap.org/data/2.5/uvi?lat=";
+		var lat = response.coord.lat;
+		var lon = response.coord.lon;
+		var uviQueryURL = uviAPI + lat + '&lon=' + lon + "&appid=" + APIKey;
+
+		$.ajax({
+			url: uviQueryURL,
+			method: 'GET'
+		}).then(function (response) {
+			console.log(response);
+			var result = response.value;
+			UV.text(result);
+
+			if (result < 3) {
+				UV.css('background-color', 'green');
+			} else if (result < 6) {
+				UV.css('background-color', 'yellow');
+			} else if (result < 8) {
+				UV.css('background-color', 'orange');
+			} else if (result < 11) {
+				UV.css('background-color', 'red');
+			} else {
+				UV.css('background-color', 'purple');
+			}
+		});
+		// done with index
+		// done with ajax response for current weather
+	});
+};
+
+
+$(".search-button").on("click", function (event) {
+	event.preventDefault();
+	displaycurrent();
+	});
+// $(document).on("click", ".city-list", displaycurrent);
+
+$(document).on("click", ".search-history", displaycurrent);
+
+// $(".search-history").on("click", function (){
+// displaycurrent ();
+// });
+
+// $(".").on('click', function(){
+//   var current_dropdown = $(this).closest('.dropdown').find('.dropdown-content');
+
+// $(".clear-button").on("click", function () {
+// 	$(".search-history").empty();
+// })
