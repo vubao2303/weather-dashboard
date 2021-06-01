@@ -11,40 +11,43 @@ var UV = $("#UV-index");
 // var city= $("#searchinput").text();
 var date = moment().format("DD/MM/YYYY");
 var APIKey = "9fbba8bfea87cd371d313708e1beec24";
-var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
-var citySearch = $('#searchinput').val();
+// var searchHistory = JSON.parse(localStorage.getItem("city")) || [];
+
+var searchHistory = []
+
+if (localStorage.getItem("city") === "") {
+	searchHistory = JSON.parse(localStorage.getItem("city"))
+}
+
+// var citySearch = $('#searchinput').val();
 // set the box back to empty
 searchInput.val("");
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
-var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+// var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
+// var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
 
 // document ready function 
 $(document).ready(function () {
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and city name add to history
+
 	$(".search-button").on("click", function (event) {
 		event.preventDefault();
 		// user input value
 		var citySearch = $('#searchinput').val().trim();
-		displaycurrent();
-		displaycurrent();
-
+		displaycurrent(citySearch);
+		displayFivedays(citySearch)
 		// set the box back to empty
 		searchInput.val("");
-
-		var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
-		var fiveQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearch + "&units=imperial&appid=" + APIKey;
-		
 		// when the button click create a new element
 		var newSearch = $("<tr>");
 		newSearch.addClass("city-list table-bordered");
 		//  that new element is user input
 		newSearch.text(citySearch);
-		console.log(newSearch);
 		$(".search-history").prepend(newSearch);
 		if (!searchHistory.includes(citySearch)) {
 			searchHistory.push(citySearch);
 		}
 		// save userinput to local storage
+
 		localStorage.setItem("city", JSON.stringify(searchHistory));
 		// below marks the end of button clicked
 	});
@@ -103,10 +106,21 @@ function displayFivedays(citySearch) {
 				$(".target").append(card);
 			}
 		}
-	});
+	},
+		// error handling 
+		function (jqXHR, textStatus, errorThrown) {
+
+			if (errorThrown) {
+				console.log("status")
+				console.log(textStatus)
+			}
+			// console.log(errorThrown)
+
+		});
 }
 // display current weather  
 function displaycurrent(citySearch) {
+	console.log(citySearch);
 	// set the box back to empty
 	var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&units=imperial&appid=" + APIKey;
 	$.ajax({
@@ -155,6 +169,9 @@ function displaycurrent(citySearch) {
 		// done with index
 		// done with ajax response for current weather
 	});
+
+	// error handling
+
 };
 
 $(document).on("click", ".city-list", function () {
@@ -168,7 +185,7 @@ $(".search-history").on("click", function () {
 	displayFivedays(target);
 });
 
-	$(".clear-button").on("click", function () {
-		$(".search-history").empty();
-	})
+$(".clear-button").on("click", function () {
+	$(".search-history").empty();
+})
 
