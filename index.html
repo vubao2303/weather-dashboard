@@ -36,6 +36,10 @@
     interactions: true,
   },
 });
+	amplitude.track('Page View', {
+  '[Amplitude] Page Domain': window.location.hostname,
+});
+
 
 </script>
 </head>
