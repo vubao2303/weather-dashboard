@@ -70,6 +70,7 @@ $(document).ready(function () {
 			$(".search-history").prepend(newlist);
 		}
 		$(".clear-button").on("click", function () {
+			amplitude.track('clearButton');
 			historyarr.empty();
 		})
 	}
