@@ -30,7 +30,11 @@ $(document).ready(function () {
 	//  when the search button is click, 3 things happened: current display, 5 days forecast, and city name add to history
 
 	$(".search-button").on("click", function (event) {
+		
 		event.preventDefault();
+		// Track a basic event
+		amplitude.track('citySearch');
+		
 		// user input value
 		var citySearch = $('#searchinput').val().trim();
 		displaycurrent(citySearch);
