@@ -20,6 +20,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<link rel="stylesheet" href="assets/style.css">
 	<title>Weather</title>
 	<script src="https://cdn.amplitude.com/script/70c3c51ae4d560a5cf21ca1ccc96c71b.js"></script>
+
+	<script>
+  window.amplitude.init("70c3c51ae4d560a5cf21ca1ccc96c71b", {
+    defaultTracking: true,
+    autocapture: true,
+    fetchRemoteConfig: true,
+  });
+  // sampleRate: 1 records 100% of sessions for initial testing; lower this for production. The SDK default (0) records nothing.
+  window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+</script>
+
+	
 <script type="text/javascript" src="https://cdn.amplitude.com/script/70c3c51ae4d560a5cf21ca1ccc96c71b.experiment.js"></script>
 
 	<script src="https://cdn.amplitude.com/script/70c3c51ae4d560a5cf21ca1ccc96c71b.experiment.js"></script>
