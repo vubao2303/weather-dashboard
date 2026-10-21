@@ -1,3 +1,15 @@
+import * as amplitude from "@amplitude/analytics-browser";
+
+// Initialize Amplitude at page load as usual
+amplitude.init(API_KEY);
+
+// Load and add the Session Replay plugin only after the page has fully loaded
+window.addEventListener('load', async () => {
+  const { sessionReplayPlugin } = await import('@amplitude/plugin-session-replay-browser');
+  const sessionReplayTracking = sessionReplayPlugin({ sampleRate: 0.5 });
+  await amplitude.add(sessionReplayTracking).promise;
+});
+
 // name variables as pointer
 var searchInput = $("#searchinput");
 var searchBtn = $(".search-button");
