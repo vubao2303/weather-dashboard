@@ -25,32 +25,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<script src="https://cdn.amplitude.com/script/70c3c51ae4d560a5cf21ca1ccc96c71b.experiment.js"></script>
 
 
-  window.amplitude.init('70c3c51ae4d560a5cf21ca1ccc96c71b', {
-    fetchRemoteConfig: true,
-	  config.autocapture.pageViews: true,
-			autocapture: {
-      pageViews: { 
-        trackOn: () => {
-          return window.location.pathname.includes('home');
-        },
-      },
-    },
-		
-    autocapture: true
-  });
-
-	amplitude.init(70c3c51ae4d560a5cf21ca1ccc96c71b); 
-	amplitude.init('70c3c51ae4d560a5cf21ca1ccc96c71b', undefined, {
-  defaultTracking: {
-    pageViews: true,
-    sessions: true,
-    interactions: true,
-  },
-});
-	amplitude.track('Page View', {
-  '[Amplitude] Page Domain': window.location.hostname,
-});
-
 
 </script>
 	<!-- Google Tag Manager (noscript) -->
